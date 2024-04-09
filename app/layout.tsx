@@ -30,8 +30,10 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Header />
-        {children}
+        <div className="max-w-[1440px] mx-auto">
+          <Header />
+          {children}
+        </div>
       </body>
     </html>
   );
