@@ -1,5 +1,5 @@
-// import { useGetProductsQuery } from "@/lib/(redux)/api";
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
 
 export interface Product {
   id: number;
@@ -10,66 +10,59 @@ export interface Product {
   image: string;
 }
 
-// interface PaginationState {
-//   page: number;
-//   data: Promise<Product[]>;
-// }
+interface InitialState {
+  products: Product[];
+  productsPerPage: number;
+  currentPage: number;
+}
 
-// const products = ({
-//   page,
-//   products,
-// }: {
-//   page: number;
-//   products: Product[];
-// }) => {
-//   const data: Product[] = products;
-//   switch (page) {
-//     case 1:
-//       return data.slice(0, 4);
-//     case 2:
-//       return data.slice(5, 10);
-//     case 3:
-//       return data.slice(11, 15);
-//     case 4:
-//       return data.slice(16, 20);
-//     default:
-//       return data;
-//   }
-// };
+const initialState: InitialState = {
+  products: [],
+  productsPerPage: 10,
+  currentPage: 1,
+};
 
-// const initialState: PaginationState = {
-//   page: 1,
-//   data: products({ page: 1 }),
-// } satisfies PaginationState as unknown as PaginationState;
 
-// export const productSlice = createSlice({
-//   name: "products",
-//   initialState,
-//   reducers: {
-//     getProductsPage1: (state) => {
-//       state.page = 1;
-//       state.data = products({ page: 1 });
-//     },
-//     getProductsPage2: (state) => {
-//       state.page = 2;
-//       state.data = products({ page: 2 });
-//     },
-//     getProductsPage3: (state) => {
-//       state.page = 3;
-//       state.data = products({ page: 3 });
-//     },
-//     getProductsPage4: (state) => {
-//       state.page = 4;
-//       state.data = products({ page: 4 });
-//     },
-//   },
-// });
 
-// export const {
-//   getProductsPage1,
-//   getProductsPage2,
-//   getProductsPage3,
-//   getProductsPage4,
-// } = productSlice.actions;
+export const productsSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers: {
+    fetchProducts: (state , action) => {
+      state.products = [...action.payload]
+    },
+    nextProductsPage: (state) => {
+      state.currentPage ++
+    },
+    previousProductsPage: (state) => {
+      state.currentPage --
+    },
+    onChangeProductsPerPage: (state, action) => {
+      state.productsPerPage = action.payload
+    },
+    onClickCurrentPage: (state, action) => {
+state.currentPage = action.payload
+    },
+  },
+});
 
-// export default productSlice.reducer;
+const fetchAllProducts = () => {
+  return async (dispatch: (arg0: { payload: any; type: "products/fetchProducts"; }) => void) => {
+    const fetchProductsApi = async () => {
+      const response = await fetch('https://fakeapidata.com/products')
+      return response
+    };
+
+    try {
+      const res = await fetchProductsApi()
+      const products = await res.json()
+      dispatch(ProductsActions.fetchProducts(products))
+    } catch (error) {
+      console.log(`Este es el error: ${error}`)
+    }
+    
+  }
+}
+
+export { fetchAllProducts };
+export const ProductsActions = productsSlice.actions;
