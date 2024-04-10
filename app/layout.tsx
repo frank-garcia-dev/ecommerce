@@ -4,6 +4,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+import { Footer } from "@/app/(home)/(layout)/footer";
 import { Header } from "@/app/(home)/(layout)/header";
 import { cn } from "@/lib/utils";
 
@@ -30,9 +31,10 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-[1440px] min-h-screen grid grid-rows-[max-content__1fr__max-content] mx-auto">
           <Header />
           {children}
+          <Footer/> 
         </div>
       </body>
     </html>
