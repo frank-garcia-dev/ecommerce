@@ -71,6 +71,7 @@ export const ProductsList = () => {
         </Card>
       ))}
     </div>
+    <br />
       <Pagination>
         <PaginationContent>
           <PaginationItem>

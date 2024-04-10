@@ -18,7 +18,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   products: [],
-  productsPerPage: 10,
+  productsPerPage: 5,
   currentPage: 1,
 };
 

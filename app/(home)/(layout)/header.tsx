@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="flex items-center max-w-[1440px] mx-auto justify-center p-4 bg-gray-800 text-white gap-40">
+    <header className="flex items-center max-w-[1440px] justify-center p-4 bg-gray-800 text-white gap-40">
       <h1 className="text-2xl">Ecommerce</h1>
       <NavigationMenu>
         <NavigationMenuList>
@@ -32,6 +32,13 @@ export const Header = () => {
             <NavigationMenuLink asChild>
               <Button asChild>
                 <Link href="/cart">Carrito</Link>
+              </Button>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Button asChild>
+                <Link href="/auth">Iniciar sesión</Link>
               </Button>
             </NavigationMenuLink>
           </NavigationMenuItem>
