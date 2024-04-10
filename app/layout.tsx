@@ -31,10 +31,12 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="max-w-[1440px] min-h-screen grid grid-rows-[max-content__1fr__max-content] mx-auto">
+        <div className="w-full md:max-w-[1440px] min-h-screen grid grid-rows-[max-content__1fr__max-content]">
           <Header />
+
           {children}
-          <Footer/> 
+          <Footer/>
+          
         </div>
       </body>
     </html>
