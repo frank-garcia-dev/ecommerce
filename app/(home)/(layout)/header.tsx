@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="flex items-center md:max-w-[1440px] justify-center md:p-4 bg-gray-800 text-white gap-40">
+    <header className="flex items-center bg-secondary md:max-w-[1440px] justify-center md:p-4 gap-40">
       <div className="grid gap-2 md:grid-cols-2">
 
       <h1 className="md:text-2xl text-center text-lg">Ecommerce</h1>

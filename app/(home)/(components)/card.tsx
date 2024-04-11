@@ -3,9 +3,8 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
 import Image from "next/image";
 
@@ -17,10 +16,10 @@ interface ImageCardProps {
 
 export const ImageCard = ({ name, description, src }: ImageCardProps) => {
   return (
-    <Card className="min-w-[15rem]">
+    <Card className="min-w-[15rem] bg-background border-foreground color-secondary border-4 text-secondary">
       <CardHeader>
         <CardTitle>{name}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardDescription className="text-foreground">{description}</CardDescription>
       </CardHeader>
       <CardContent className="flex justify-center">
         <div className="w-[14rem] h-[14rem] relative flex">

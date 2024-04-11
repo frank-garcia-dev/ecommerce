@@ -52,19 +52,21 @@ export default function Component() {
       <div className="mx-auto max-w-2xl">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
-            <Button size="icon" variant="outline">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Atrás</span>
+            <Button asChild size="icon" className='bg-secondary text-background border-slate-700' variant="outline">
+              <Link href='/'>
+              <ArrowLeft className="h-4 w-4 " />
+              </Link>
+              
             </Button>
             <h1 className="font-semibold text-lg md:text-xl">Checkout</h1>
           </div>
-          <div className="rounded-lg border overflow-hidden">
-            <div className="flex items-center p-4 border-b">
+          <div className="rounded-lg border bg-[#d2e2eb] text-primary overflow-hidden">
+            <div className="flex items-center p-4 border-b border-primary">
               <ShoppingBag className="h-6 w-6" />
               <div className="ml-4 text-sm font-medium">Tu órden</div>
               <div className="ml-auto text-sm font-medium">2 productos</div>
             </div>
-            <div className="p-4 border-b">
+            <div className="p-4 border-b border-primary">
               <div className="grid gap-2 text-sm">
                 <div className="font-medium">Ejemplo de producto</div>
                 <div>2x</div>
@@ -268,7 +270,7 @@ export default function Component() {
                 </div>
                 <div className="flex flex-col py-4 gap-2">
             <Button type='submit'>Confirmar órden</Button>
-            <Button variant="outline"><Link href='/'>Regresar a tu carrito</Link></Button>
+            <Button className="text-primary" variant="outline"><Link href='/'>Regresar a tu carrito</Link></Button>
           </div>
               </form>
             </Form>
