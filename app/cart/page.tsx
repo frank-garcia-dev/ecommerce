@@ -1,10 +1,52 @@
-
+'use client'
 import { Button } from "@/components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft, ShoppingBag } from "lucide-react"
+import Link from "next/link"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+
+const formSchema = z.object({
+  name: z.string().min(3, {message: 'Nombre completo requerido'}),
+  email: z.string().email({message: 'Correo electrónico inválido'}),
+  address: z.string().min(3, {message: 'Dirección requerida'}),
+  city: z.string().min(3, {message: 'Ciudad requerida'}),
+  state: z.string().min(3, {message: 'Estado requerido'}),
+  zip: z.string().min(3, {message: 'Código postal requerido'}),
+  card: z.string().min(3, {message: 'Tarjeta de crédito requerida'}),
+  cardName: z.string().min(3, {message: 'Nombre en tarjeta requerido'}),
+  cardAddress: z.string().min(3, {message: 'Dirección en tarjeta requerida'}),
+  cardCity: z.string().min(3, {message: 'Ciudad en tarjeta requerida'}),
+  cardState: z.string().min(3, {message: 'Estado en tarjeta requerido'}),
+  cardZip: z.string().min(3, {message: 'Código postal en tarjeta requerido'}),
+})
 
 export default function Component() {
+  const watch = useForm<z.infer<typeof formSchema>>().watch
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      card: '',
+      cardName: '',
+      cardAddress: '',
+      cardCity: '',
+      cardState: '',
+      cardZip: '',
+    }
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+  }
+
   return (
     <div className="px-4 py-6 md:px-6">
       <div className="mx-auto max-w-2xl">
@@ -45,73 +87,193 @@ export default function Component() {
               <div className="font-semibold">Información de envío</div>
               <div className="text-sm text-gray-500 dark:text-gray-400">Ingresa la información para tu envío</div>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="grid gap-2">
-                <Label htmlFor="name">Nombre completo</Label>
-                <Input id="name" placeholder="Ingresa tu nombre completo" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="email">Correo electrónico</Label>
-                <Input id="email" placeholder="Ingresa tu correo electrónico" type="email" />
-              </div>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="grid gap-2">
-                <Label htmlFor="address">Dirección</Label>
-                <Input id="address" placeholder="Ingresa tu dirección" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="city">Ciudad</Label>
-                <Input id="city" placeholder="Ingresa tu ciudad" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="state">Estado</Label>
-                <Input id="state" placeholder="Ingresa tu estado" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="zip">Código postal</Label>
-                <Input id="zip" placeholder="Aquí tu código postal" />
-              </div>
-            </div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <div className="grid gap-4 md:grid-cols-2">
+
+                <FormField
+                control={form.control}
+                name="name"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Nombre completo</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu nombre completo" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                
+                />
+
+                <FormField
+                control={form.control}
+                name="email"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Correo electrónico</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu correo electrónico" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                
+                />
+                <FormField
+                control={form.control}
+                name="address"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Dirección</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu dirección" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                
+                />
+                <FormField
+                control={form.control}
+                name="city"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Ciudad</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu ciudad" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                
+                />
+                <FormField
+                control={form.control}
+                name="state"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Estado</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu estado" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                
+                />
+                <FormField
+                control={form.control}
+                name="zip"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Código postal</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu código postal" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                
+                />
+                <div className="grid col-span-2 gap-2">
+                  <h3 className="font-semibold">Información de pago</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Ingresa la información de pago</p>
+                </div>
+
+                <FormField
+                control={form.control}
+                name="card"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Tarjeta de crédito</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu tarjeta de crédito" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                />
+
+                <FormField
+                control={form.control}
+                name="cardName"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Nombre completo</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa el nombre que aparece en tu tarjeta" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                />
+
+                <FormField
+                control={form.control}
+                name="cardAddress"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Dirección</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa la dirección de tu tarjeta" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                />
+
+                <FormField
+                control={form.control}
+                name="cardCity"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Ciudad</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu ciudad" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                />
+
+                <FormField
+                control={form.control}
+                name="cardState"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Estado</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu estado" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                />
+
+                <FormField
+                control={form.control}
+                name="cardZip"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Código postal</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ingresa tu código postal" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+                />
+
+                </div>
+                <div className="flex flex-col py-4 gap-2">
+            <Button type='submit'>Confirmar órden</Button>
+            <Button variant="outline"><Link href='/'>Regresar a tu carrito</Link></Button>
           </div>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <div className="font-semibold">Información de pago</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Ingresa la información de pago</div>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="grid gap-2">
-                <Label htmlFor="card">Tarjeta de crédito</Label>
-                <Input id="card" placeholder="Ingresa tu tarjeta de crédito" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="name">Nombre completo</Label>
-                <Input id="name" placeholder="Ingresa tu nombre completo" />
-              </div>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="grid gap-2">
-                <Label htmlFor="address">Dirección</Label>
-                <Input id="address" placeholder="Ingresa tu dirección" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="city">Ciudad</Label>
-                <Input id="city" placeholder="Ingresa tu ciudad" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="state">Estado</Label>
-                <Input id="state" placeholder="Ingresa tu estado" />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="zip">Código postal</Label>
-                <Input id="zip" placeholder="Ingresa tu código postal" />
-              </div>
-            </div>
+              </form>
+            </Form>
           </div>
-          <div className="flex flex-col gap-2">
-            <Button>Confirmar órden</Button>
-            <Button variant="outline">Regresar a tu carrito</Button>
-          </div>
+          {JSON.stringify(form.getValues(), null, 2)}
         </div>
       </div>
     </div>
