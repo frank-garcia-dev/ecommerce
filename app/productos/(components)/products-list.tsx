@@ -57,7 +57,7 @@ export const ProductsList = () => {
             <br />
           </CardHeader>
           <CardContent>
-            <div className="flex relative size-[15rem] mx-auto">
+            <div className="flex relative size-[8rem] md:size-[15rem] mx-auto">
               <Image src={product.image} sizes="" alt={product.title} fill/>
             </div>
           </CardContent>
@@ -78,12 +78,20 @@ export const ProductsList = () => {
             <PaginationPrevious onClick={handlePreviousPage} />
           </PaginationItem>
           {pages.map((page) => (
-            <PaginationItem key={page}>
+            
+            <PaginationItem className="hidden md:block" key={page}>
               <PaginationLink onClick={()=> handleCurrentPage.call(null, page)} isActive={page === currentPage}>
               {page}
               </PaginationLink>
             </PaginationItem>
+            
           ))}
+              <PaginationItem className="md:hidden">
+              <PaginationLink >
+              {currentPage}
+              </PaginationLink>
+            </PaginationItem>
+
           <PaginationItem>
             <PaginationNext onClick={handleNextPage} />
           </PaginationItem>
