@@ -48,7 +48,7 @@ const [posI, setPosI] = useState([0, 1, 2, 3, 4]);
   
 
   return (
-    <div className="flex items-center relative overflow-hidden w-full flex-col justify-center ">
+    <div className="flex items-center relative overflow-hidden border-4 bg-secondary mt-4 border-secondary rounded-lg w-full flex-col justify-center ">
       {productsToShow.map((item, index) => (
         <motion.div
           key={index}

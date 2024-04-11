@@ -49,7 +49,7 @@ export const ProductsList = () => {
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-10">
       
       {visibleProducts?.map((product) => (
-        <Card key={product.id}>
+        <Card className="bg-secondary text-foreground" key={product.id}>
           <CardHeader>
             <CardTitle>{product.title}</CardTitle>
             <br />
@@ -72,22 +72,22 @@ export const ProductsList = () => {
       ))}
     </div>
     <br />
-      <Pagination>
+      <Pagination className='text-secondary'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious onClick={handlePreviousPage} />
           </PaginationItem>
           {pages.map((page) => (
             
-            <PaginationItem className="hidden md:block" key={page}>
-              <PaginationLink onClick={()=> handleCurrentPage.call(null, page)} isActive={page === currentPage}>
+            <PaginationItem className="hidden  md:block" key={page}>
+              <PaginationLink className="hover:text-secondary" onClick={()=> handleCurrentPage.call(null, page)} isActive={page === currentPage}>
               {page}
               </PaginationLink>
             </PaginationItem>
             
           ))}
               <PaginationItem className="md:hidden">
-              <PaginationLink >
+              <PaginationLink className="hover:text-secondary"  >
               {currentPage}
               </PaginationLink>
             </PaginationItem>
