@@ -1,2 +1,2 @@
-## Este proyecto fue creado por Pedro Francisco García Navarro
+## Este proyecto fue creado por Francisco García
 
